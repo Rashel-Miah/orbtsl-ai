@@ -1,0 +1,10 @@
+streamlit 
+cx_Oracle 
+pandas
+langchain
+langchain_core
+langchain_community
+langchain_ollama
+langgraph
+requests
+oracledb
