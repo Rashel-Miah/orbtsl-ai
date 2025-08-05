@@ -1,0 +1,50 @@
+[
+  {
+    "input": "List all users.",
+    "query": "SELECT * FROM users"
+  },
+  {
+    "input": "how many open outsource work orders are there?",
+    "query": "SELECT Count(*) FROM vw_outsource_workorder WHERE open_status = 'Y'"
+  },
+  {
+    "input": "how many close outsource work orders are there?",
+    "query": "SELECT Count(*) FROM vw_outsource_workorder WHERE close_status = 'Y'"
+  },
+  {
+    "input": "how many transfer outsource work orders are there?",
+    "query": "SELECT Count(*) FROM vw_outsource_workorder WHERE transfer_status = 'Y'"
+  },
+  {
+    "input": "what is the total outstanding?",
+    "query": "SELECT Sum(Total_Outstanding) FROM vw_employee_outstanding"
+  },
+  {
+    "input": "what is the total outstanding for D05468?",
+    "query": "SELECT Sum(Total_Outstanding) FROM vw_employee_outstanding Where employee_code = 'D05468'"
+  },
+  {
+    "input": "Show the total collection amount.",
+    "query": "SELECT SUM(amount) FROM vw_taxi_collection"
+  },
+  {
+    "input": "What is the today's total collection amount.",
+    "query": "SELECT SUM(amount) FROM vw_taxi_collection where paid_date = trunc(sysdate)"
+  },
+  {
+    "input": "Show the total cc amount.",
+    "query": "SELECT SUM(credit_card_amount) FROM vw_taxi_collection"
+  },
+  {
+    "input": "List all opened or active NRT.",
+    "query": "Select nrtnumbr From vw_fm_nrtdetails where compcode = '100' And status = 'ACT'"
+  },
+  {
+    "input": "How many opened or active NRT are there",
+    "query": "Select count(nrtnumbr) From vw_fm_nrtdetails where compcode = '100' And status = 'ACT'"
+  },
+  {
+    "input": "How many closed NRT are there",
+    "query": "Select count(nrtnumbr) From vw_fm_nrtdetails where compcode = '100' And status = 'CLD'"
+  }
+]

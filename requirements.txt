@@ -8,4 +8,6 @@ langchain_ollama
 langgraph
 requests
 oracledb
-duckduckgo-search
+pandasai
+langchain_huggingface 
+sentence-transformers

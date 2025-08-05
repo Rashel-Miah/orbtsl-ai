@@ -1,12 +1,6 @@
 from typing import Annotated
 from langgraph.graph import StateGraph, START, END
-from langgraph.graph.message import add_messages
-from langchain_ollama import ChatOllama
-from langchain_community.tools import DuckDuckGoSearchRun, DuckDuckGoSearchResults
-from langgraph.prebuilt import ToolNode, tools_condition
 from langgraph.checkpoint.memory import MemorySaver
-from langchain_community.utilities import SQLDatabase
-from langchain_community.agent_toolkits import SQLDatabaseToolkit
 from typing_extensions import TypedDict, Annotated
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_community.tools.sql_database.tool import QuerySQLDatabaseTool
@@ -48,6 +42,7 @@ def run_bot(llm, db, username, user_input):
     Pay attention to use only the column names that you can see in the schema
     description. Be careful to not query for columns that do not exist. Also,
     pay attention to which column is in which table.
+    Pay attention to use TRUNC(SYSDATE) function to get the current date, if the question involves "today".
 
     Do not add semicolon at the end of generated query. Remove the semicolon if already there. 
 
