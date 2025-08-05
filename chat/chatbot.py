@@ -91,30 +91,12 @@ if user_input := st.chat_input("Ask a question about your database..."):
     similar_examples = example_selector.invoke(user_input)
     few_shot = [{"input": d.page_content, "query": d.metadata["query"]} for d in similar_examples]
     
-    #print("Input: ", user_input)
-    #print("Schemas: ", schema_hint)
-    #print("Few Shot: ", few_shot)
-
-    #print([f"Q: {ex['input']}\nA: {ex['query']}" for ex in few_shot])
-
-    #prompt = build_prompt(schema_hint, few_shot, user_input)
-    #print("Prompt: ", prompt)
-    #llm = ChatOllama(model="qwen2.5-coder:7b", temperature=0.1,base_url="http://localhost:11434",)
-    #print("LLM Generated: ")
-    #sql = llm.invoke(prompt)
-    #print("SQL:", sql)
-
     # LangGraph SQL generator
     chain = get_sql_chain()
     result = chain.invoke({"question": user_input, "schema": schema_hint, "examples": few_shot}, config=config)
-    #sql = result["sql"]
-    #print("SQL: ",sql)
-    #st.markdown("**🧠 Generated SQL:**")
-    #st.code(sql)
 
     # Execute SQL
     answer = result["answer"]
-    #st.write(result["answer"])
 
     divar = f"""
     <div class="chat-row row-reverse">
@@ -127,20 +109,4 @@ if user_input := st.chat_input("Ask a question about your database..."):
             """
     st.markdown(divar,unsafe_allow_html=True)
 
-    # Display assistant response in chat message container
-    #with st.chat_message("assistant", avatar="static/ai_icon.png"):
-        # response = st.write_stream(llm_engine.stream(prompt))
-        #st.markdown(answer)
-        #print(response)
-        # Add assistant response to chat history
     st.session_state.messages.append({"role":"assistant", "content":answer})
-
-    # Add memory
-    #add_to_memory(user_input, answer)
-    #st.session_state.chat_history.append((user_input, answer))
-
-    #st.markdown(get_chat_history())
-# Show history
-#with st.expander("🧾 Conversation History"):
-    #for q, a in st.session_state.chat_history:
-        #st.markdown(f"**Q:** {q}\n\n**A:** {a}")
